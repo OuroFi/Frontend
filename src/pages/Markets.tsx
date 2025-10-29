@@ -1,6 +1,42 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import { getSymbolPrice } from "../utils/GetSymbolPrice";
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const item = {
+  hidden: { y: 20, opacity: 0 },
+  show: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
+
+const marketCard = {
+  hidden: { scale: 0.8, opacity: 0 },
+  show: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      type: "spring" as const,
+      stiffness: 100,
+      damping: 15,
+    },
+  },
+};
 
 interface MarketData {
   symbol: string;
@@ -130,23 +166,34 @@ export default function Markets() {
   };
 
   return (
-    <div className="min-h-screen pt-20" style={{
-      backgroundColor: 'var(--rk-colors-modalBackground)',
-      color: 'var(--rk-colors-modalText)'
-    }}>
+    <motion.div
+      className="min-h-screen pt-20"
+      style={{
+        backgroundColor: 'var(--rk-colors-modalBackground)',
+        color: 'var(--rk-colors-modalText)'
+      }}
+      initial="hidden"
+      animate="show"
+      variants={container}
+    >
       <div className="container mx-auto px-6 py-8">
         {/* Header */}
-        <div className="mb-8">
+        <motion.div className="mb-8" variants={item}>
           <h1 className="text-4xl font-bold mb-2">Discover</h1>
-        </div>
+        </motion.div>
 
         {/* Category Filters */}
-        <div className="flex items-center space-x-6 mb-8">
-          <div className="flex items-center space-x-1">
+        <motion.div className="flex items-center space-x-6 mb-8" variants={item}>
+          <motion.div
+            className="flex items-center space-x-1"
+            initial={{ rotate: 0 }}
+            animate={{ rotate: 360 }}
+            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          >
             <span className="text-lg">⭐</span>
-          </div>
-          {categories.map((category) => (
-            <button
+          </motion.div>
+          {categories.map((category, index) => (
+            <motion.button
               key={category}
               onClick={() => setSelectedCategory(category)}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
@@ -162,21 +209,38 @@ export default function Markets() {
                   ? 'var(--rk-colors-actionButtonSecondaryBackground)'
                   : 'transparent'
               }}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               {category}
-            </button>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Market Table */}
-        <div className="rounded-lg overflow-hidden" style={{
-          backgroundColor: 'var(--rk-colors-modalBackground)',
-          border: '1px solid var(--rk-colors-generalBorder)'
-        }}>
+        <motion.div
+          className="rounded-lg overflow-hidden"
+          style={{
+            backgroundColor: 'var(--rk-colors-modalBackground)',
+            border: '1px solid var(--rk-colors-generalBorder)'
+          }}
+          variants={item}
+          whileHover={{ scale: 1.01 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
           {/* Table Header */}
-          <div className="grid grid-cols-4 px-6 py-4 border-b" style={{
-            borderColor: 'var(--rk-colors-generalBorder)'
-          }}>
+          <motion.div
+            className="grid grid-cols-4 px-6 py-4 border-b"
+            style={{
+              borderColor: 'var(--rk-colors-generalBorder)'
+            }}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
             <div className="text-sm font-medium" style={{
               color: 'var(--rk-colors-modalTextSecondary)'
             }}>
@@ -197,7 +261,7 @@ export default function Markets() {
             }}>
               Last 24h
             </div>
-          </div>
+          </motion.div>
 
           {/* Market Rows */}
           <div>
@@ -207,14 +271,24 @@ export default function Markets() {
                   Loading market data...
                 </div>
               </div>
-            ) : filteredMarkets.map((market) => (
-              <div
+            ) : filteredMarkets.map((market, index) => (
+              <motion.div
                 key={market.symbol}
                 onClick={() => handleMarketClick(market.symbol)}
                 className="grid grid-cols-4 px-6 py-4 cursor-pointer transition-colors hover:opacity-80 border-b"
                 style={{
                   borderColor: 'var(--rk-colors-generalBorderDim)'
                 }}
+                variants={marketCard}
+                initial="hidden"
+                animate="show"
+                transition={{ delay: index * 0.1 }}
+                whileHover={{
+                  scale: 1.02,
+                  backgroundColor: "rgba(255, 255, 255, 0.05)",
+                  transition: { duration: 0.2 }
+                }}
+                whileTap={{ scale: 0.98 }}
               >
                 {/* Market Info */}
                 <div className="flex items-center space-x-3">
@@ -267,7 +341,7 @@ export default function Markets() {
                     isPositive={market.change24h >= 0}
                   />
                 </div>
-              </div>
+              </motion.div>
             ))}
             {!loading && filteredMarkets.length === 0 && (
               <div className="flex justify-center items-center py-12">
@@ -277,17 +351,23 @@ export default function Markets() {
               </div>
             )}
           </div>
-        </div>
+        </motion.div>
 
         {/* Footer Info */}
-        <div className="mt-8 text-center">
+        <motion.div
+          className="mt-8 text-center"
+          variants={item}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
           <p className="text-sm" style={{
             color: 'var(--rk-colors-modalTextSecondary)'
           }}>
             Real-time market data • Updated every second
           </p>
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }

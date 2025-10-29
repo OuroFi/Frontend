@@ -1,8 +1,44 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { motion } from "framer-motion";
 import TradingViewWidget from "../components/TradingView";
 import { Symbols } from "../types";
 import { getSymbolPrice } from "../utils/GetSymbolPrice";
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const item = {
+  hidden: { y: 20, opacity: 0 },
+  show: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
+
+const slideIn = {
+  hidden: { x: 300, opacity: 0 },
+  show: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: "spring" as const,
+      stiffness: 100,
+      damping: 20,
+    },
+  },
+};
 
 export default function Trade() {
   const { symbol } = useParams();
@@ -49,12 +85,18 @@ export default function Trade() {
   };
 
   return (
-    <div className="min-h-screen" style={{
-      backgroundColor: 'var(--rk-colors-modalBackground)',
-      color: 'var(--rk-colors-modalText)'
-    }}>
+    <motion.div
+      className="min-h-screen mt-20"
+      style={{
+        backgroundColor: 'var(--rk-colors-modalBackground)',
+        color: 'var(--rk-colors-modalText)'
+      }}
+      initial="hidden"
+      animate="show"
+      variants={container}
+    >
       {/* Header with price info */}
-      <div className="px-6 pt-6 pb-4">
+      <motion.div className="px-6 pt-6 pb-4" variants={item}>
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6">
             <div className="flex items-center space-x-2">
@@ -131,27 +173,35 @@ export default function Trade() {
             </button>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Main content area with chart and side panel */}
-      <div className="px-6">
-        {/* Timeframes */}
-        {renderTimeframes()}
+      <motion.div className="px-6" variants={item}>
 
         {/* Chart and Trading Panel Layout */}
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Chart container - takes remaining space */}
-          <div className="flex-1 order-2 lg:order-1">
+          <motion.div
+            className="flex-1 order-2 lg:order-1"
+            variants={item}
+            whileHover={{ scale: 1.01 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
             <div className="h-[400px] lg:h-[600px] rounded-lg overflow-hidden" style={{
               backgroundColor: 'var(--rk-colors-actionButtonSecondaryBackground)',
               border: '1px solid var(--rk-colors-generalBorder)'
             }}>
               <TradingViewWidget symbol={`${currentSymbol}USD`} />
             </div>
-          </div>
+          </motion.div>
 
           {/* Trading Panel - fixed width sidebar */}
-          <div className="w-full lg:w-80 lg:flex-shrink-0 order-1 lg:order-2">
+          <motion.div
+            className="w-full lg:w-80 lg:flex-shrink-0 order-1 lg:order-2"
+            variants={slideIn}
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
             <div className="rounded-lg p-4 h-fit" style={{
               backgroundColor: 'var(--rk-colors-modalBackground)',
               border: '1px solid var(--rk-colors-generalBorder)',
@@ -160,7 +210,7 @@ export default function Trade() {
               {/* Market/Limit tabs */}
               <div className="flex mb-4 text-sm">
                 {["MARKET", "LIMIT"].map((tab) => (
-                  <button
+                  <motion.button
                     key={tab}
                     onClick={() => setActiveTab(tab as "MARKET" | "LIMIT")}
                     className={`flex-1 py-2 px-4 font-medium transition-colors ${
@@ -172,9 +222,11 @@ export default function Trade() {
                       color: activeTab === tab ? 'var(--rk-colors-modalText)' : 'var(--rk-colors-modalTextSecondary)',
                       borderBottomColor: activeTab === tab ? 'var(--rk-colors-accentColor)' : 'transparent'
                     }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     {tab}
-                  </button>
+                  </motion.button>
                 ))}
               </div>
 
@@ -197,7 +249,7 @@ export default function Trade() {
                 backgroundColor: 'var(--rk-colors-actionButtonSecondaryBackground)'
               }}>
                 {["BUY", "SELL"].map((type) => (
-                  <button
+                  <motion.button
                     key={type}
                     onClick={() => setOrderType(type as "BUY" | "SELL")}
                     className={`flex-1 py-2 px-4 rounded text-sm font-bold transition-colors ${
@@ -212,9 +264,14 @@ export default function Trade() {
                         : 'var(--rk-colors-modalTextSecondary)',
                       borderRadius: 'var(--rk-radii-connectButton)'
                     }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
                   >
                     {type}
-                  </button>
+                  </motion.button>
                 ))}
               </div>
 
@@ -280,7 +337,7 @@ export default function Trade() {
               </div>
 
               {/* Buy/Long button */}
-              <button
+              <motion.button
                 onClick={handleBuyLong}
                 className="w-full py-3 font-bold text-sm transition-colors hover:opacity-90"
                 style={{
@@ -292,49 +349,82 @@ export default function Trade() {
                   border: 'none',
                   boxShadow: 'var(--rk-shadows-connectButton)'
                 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, type: "spring", stiffness: 200 }}
               >
                 {orderType} / {orderType === "BUY" ? "LONG" : "SHORT"}
-              </button>
+              </motion.button>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Bottom tabs */}
-      <div className="px-6 mt-6 mb-6">
+      <motion.div
+        className="px-6 mt-6 mb-6"
+        variants={item}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+      >
         <div className="flex space-x-8 border-b"
              style={{ borderColor: 'var(--rk-colors-generalBorder)' }}>
-          <button className="pb-3 font-medium border-b-2"
-                  style={{
-                    color: 'var(--rk-colors-modalText)',
-                    borderBottomColor: 'var(--rk-colors-accentColor)'
-                  }}>
+          <motion.button
+            className="pb-3 font-medium border-b-2"
+            style={{
+              color: 'var(--rk-colors-modalText)',
+              borderBottomColor: 'var(--rk-colors-accentColor)'
+            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             Positions
-          </button>
-          <button className="pb-3 transition-colors hover:opacity-80"
-                  style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+          </motion.button>
+          <motion.button
+            className="pb-3 transition-colors hover:opacity-80"
+            style={{ color: 'var(--rk-colors-modalTextSecondary)' }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             Orders
-          </button>
-          <button className="pb-3 transition-colors hover:opacity-80"
-                  style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+          </motion.button>
+          <motion.button
+            className="pb-3 transition-colors hover:opacity-80"
+            style={{ color: 'var(--rk-colors-modalTextSecondary)' }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             History
-          </button>
-          <div className="ml-auto flex items-center">
+          </motion.button>
+          <motion.div
+            className="ml-auto flex items-center"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
+          >
             <input type="checkbox" className="mr-2 text-xs" />
             <span className="text-xs" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
               Include Fees
             </span>
-          </div>
+          </motion.div>
         </div>
-        <div className="py-8">
+        <motion.div
+          className="py-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
           <div className="text-center text-sm" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
             No positions found
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Custom CSS for leverage slider */}
-      <style jsx>{`
+      <style>{`
         .leverage-slider {
           background: linear-gradient(90deg, #4ade80 0%, #3b82f6 50%, #8b5cf6 100%);
         }
@@ -358,6 +448,6 @@ export default function Trade() {
           border: 2px solid #1a1a1a;
         }
       `}</style>
-    </div>
+    </motion.div>
   );
 }

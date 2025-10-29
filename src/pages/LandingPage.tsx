@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import { getSymbolPrice } from "../utils/GetSymbolPrice";
 
 const container = {
@@ -125,14 +126,25 @@ export default function LandingPage() {
   ];
 
   return (
-    <main className="min-h-screen" style={{ backgroundColor: 'var(--rk-colors-modalBackground)' }}>
+    <motion.main
+      className="min-h-screen"
+      style={{ backgroundColor: 'var(--rk-colors-modalBackground)' }}
+      initial="hidden"
+      animate="show"
+      variants={container}
+    >
       <div className="pt-20 px-4 lg:px-5 max-w-[1600px] mx-auto">
         {/* Hero Section */}
-        <div className="flex flex-col gap-10 bg-gradient-to-br p-8 lg:p-20 rounded-3xl relative overflow-hidden"
-             style={{
-               background: `linear-gradient(135deg, var(--rk-colors-accentColor)20 0%, var(--rk-colors-connectionIndicator)20 100%)`,
-               color: 'var(--rk-colors-modalText)'
-             }}>
+        <motion.div
+          className="flex flex-col gap-10 bg-gradient-to-br p-8 lg:p-20 rounded-3xl relative overflow-hidden"
+          style={{
+            background: `linear-gradient(135deg, var(--rk-colors-accentColor)20 0%, var(--rk-colors-connectionIndicator)20 100%)`,
+            color: 'var(--rk-colors-modalText)'
+          }}
+          variants={item}
+          whileHover={{ scale: 1.02 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
 
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
@@ -158,94 +170,167 @@ export default function LandingPage() {
           </div>
 
           <div className="w-full flex flex-col lg:flex-row gap-12 lg:gap-20 relative z-10">
-            <div className="flex flex-col gap-8">
-              <h1 className="text-4xl lg:text-6xl font-bold lg:w-[45vw] leading-tight">
+            <motion.div className="flex flex-col gap-8" variants={container}>
+              <motion.h1
+                className="text-4xl lg:text-6xl font-bold lg:w-[45vw] leading-tight"
+                variants={item}
+              >
                 Ouro Finance: Next-Gen Perpetual Trading
-              </h1>
-              <h2 className="text-xl opacity-80 max-w-2xl">
+              </motion.h1>
+              <motion.h2
+                className="text-xl opacity-80 max-w-2xl"
+                variants={item}
+              >
                 Experience lightning-fast perpetual trading with off-chain
                 execution and on-chain settlement for maximum security and
                 efficiency
-              </h2>
-              <div>
-                <button
-                  className="px-10 py-6 rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-105 flex items-center gap-2"
+              </motion.h2>
+              <motion.div variants={item}>
+                <motion.button
+                  className="px-10 py-6 rounded-2xl font-bold text-lg transition-all duration-300 flex items-center gap-2"
                   style={{
                     backgroundColor: 'var(--rk-colors-modalBackground)',
                     color: 'var(--rk-colors-modalText)',
                   }}
                   onClick={() => navigate("/trade/ALGOUSD")}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, type: "spring", stiffness: 200 }}
                 >
                   Start Trading
-                  <span>→</span>
-                </button>
-              </div>
-            </div>
+                  <motion.span
+                    initial={{ x: 0 }}
+                    whileHover={{ x: 5 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                  >
+                    →
+                  </motion.span>
+                </motion.button>
+              </motion.div>
+            </motion.div>
 
-            <div className="lg:ml-auto flex flex-col gap-4">
-              <div className="backdrop-blur-sm p-8 rounded-2xl text-xl font-bold w-full lg:w-[400px] transform hover:scale-105 transition-all duration-300"
-                   style={{
-                     backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                     border: '1px solid rgba(255, 255, 255, 0.2)'
-                   }}>
+            <motion.div
+              className="lg:ml-auto flex flex-col gap-4"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+            >
+              <motion.div
+                className="backdrop-blur-sm p-8 rounded-2xl text-xl font-bold w-full lg:w-[400px]"
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)'
+                }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 Trade Major Assets
                 <div className="text-base font-normal mt-2 opacity-70">
                   ETH, BTC, SOL, and ALGO with up to 10x leverage
                 </div>
-              </div>
-              <div className="backdrop-blur-sm p-8 rounded-2xl text-xl font-bold w-full lg:w-[400px] transform hover:scale-105 transition-all duration-300"
-                   style={{
-                     backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                     border: '1px solid rgba(255, 255, 255, 0.2)'
-                   }}>
+              </motion.div>
+              <motion.div
+                className="backdrop-blur-sm p-8 rounded-2xl text-xl font-bold w-full lg:w-[400px]"
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)'
+                }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.7, duration: 0.5, type: "spring", stiffness: 300 }}
+              >
                 Ultra-Low Latency
                 <div className="text-base font-normal mt-2 opacity-70">
                   Off-chain order book for instant execution
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
 
           {/* Stats Section */}
-          <div className="flex flex-col lg:flex-row gap-10 relative z-10">
+          <motion.div
+            className="flex flex-col lg:flex-row gap-10 relative z-10"
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+          >
             <div className="flex flex-row gap-20">
-              <div className="flex flex-col gap-4">
-                <span className="text-6xl font-bold">4</span>
+              <motion.div className="flex flex-col gap-4" variants={item}>
+                <motion.span
+                  className="text-6xl font-bold"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.8, type: "spring", stiffness: 200 }}
+                >
+                  4
+                </motion.span>
                 <span className="text-xl opacity-80">Trading Pairs</span>
-              </div>
-              <div className="flex flex-col gap-4">
-                <span className="text-6xl font-bold">10x</span>
+              </motion.div>
+              <motion.div className="flex flex-col gap-4" variants={item}>
+                <motion.span
+                  className="text-6xl font-bold"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.9, type: "spring", stiffness: 200 }}
+                >
+                  10x
+                </motion.span>
                 <span className="text-xl opacity-80">Max Leverage</span>
-              </div>
-              <div className="flex flex-col gap-4">
-                <span className="text-6xl font-bold">0.1%</span>
+              </motion.div>
+              <motion.div className="flex flex-col gap-4" variants={item}>
+                <motion.span
+                  className="text-6xl font-bold"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 1.0, type: "spring", stiffness: 200 }}
+                >
+                  0.1%
+                </motion.span>
                 <span className="text-xl opacity-80">Trading Fee</span>
-              </div>
+              </motion.div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Popular Markets */}
-        <section className="py-20">
-          <div className="text-center mb-16">
+        <motion.section
+          className="py-20"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={container}
+        >
+          <motion.div className="text-center mb-16" variants={item}>
             <h2 className="text-4xl lg:text-5xl font-bold mb-6" style={{ color: 'var(--rk-colors-modalText)' }}>
               Popular Markets
             </h2>
             <p className="text-xl max-w-3xl mx-auto" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
               Trade the most popular crypto assets with competitive spreads
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {popularMarkets.map((market, index) => (
-              <div
+            {popularMarkets.map((market) => (
+              <motion.div
                 key={market.symbol}
                 onClick={() => navigate(`/trade/${market.symbol}USD`)}
-                className="backdrop-blur-sm p-8 rounded-2xl border-0 cursor-pointer transition-all duration-300 hover:scale-105 group"
+                className="backdrop-blur-sm p-8 rounded-2xl border-0 cursor-pointer group"
                 style={{
                   backgroundColor: 'rgba(255, 255, 255, 0.05)',
                   border: '1px solid rgba(255, 255, 255, 0.1)'
                 }}
+                variants={item}
+                whileHover={{
+                  scale: 1.05,
+                  y: -10,
+                  backgroundColor: "rgba(255, 255, 255, 0.1)",
+                }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 300 }}
               >
                 <div className="flex items-center space-x-3 mb-6">
                   <div className="w-12 h-12 rounded-xl flex items-center justify-center"
@@ -280,31 +365,40 @@ export default function LandingPage() {
                      }}>
                   {market.change >= 0 ? "+" : ""}{market.change}%
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* Features Section */}
-        <section className="py-20">
-          <div className="text-center mb-16">
+        <motion.section
+          className="py-20"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={container}
+        >
+          <motion.div className="text-center mb-16" variants={item}>
             <h2 className="text-4xl lg:text-5xl font-bold mb-6" style={{ color: 'var(--rk-colors-modalText)' }}>
               Advanced Trading Features
             </h2>
             <p className="text-xl max-w-3xl mx-auto" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
               Everything you need for professional perpetual trading in one platform
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="backdrop-blur-sm p-8 rounded-2xl transition-all duration-300 hover:scale-105 border-0 h-full group"
+                className="backdrop-blur-sm p-8 rounded-2xl border-0 h-full group"
                 style={{
                   backgroundColor: 'rgba(255, 255, 255, 0.05)',
                   border: '1px solid rgba(255, 255, 255, 0.1)'
                 }}
+                variants={item}
+                whileHover={{ scale: 1.05, y: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
               >
                 <div className="h-14 w-14 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300"
                      style={{
@@ -318,10 +412,10 @@ export default function LandingPage() {
                 <p className="text-lg leading-relaxed" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
                   {feature.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* Roadmap Section */}
         <section className="py-20 px-4 lg:px-40">
@@ -506,6 +600,6 @@ export default function LandingPage() {
           </div>
         </div>
       </footer>
-    </main>
+    </motion.main>
   );
 }
