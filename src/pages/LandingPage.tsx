@@ -41,9 +41,9 @@ export default function LandingPage() {
   }, []);
 
   const popularMarkets = [
-    { symbol: "ETH", name: "Ethereum", price: ethPrice, change: -3.23, icon: "/ethereum.png" },
-    { symbol: "BTC", name: "Bitcoin", price: btcPrice, change: 2.41, icon: "/bitcoin.png" },
-    { symbol: "SOL", name: "Solana", price: solPrice, change: -1.87, icon: "/solana.png" },
+    { symbol: "ETH", name: "Ethereum", price: ethPrice, change: -3.23, icon: "/eth.png" },
+    { symbol: "BTC", name: "Bitcoin", price: btcPrice, change: 2.41, icon: "/btc.png" },
+    { symbol: "SOL", name: "Solana", price: solPrice, change: -1.87, icon: "/sol.png" },
     { symbol: "ALGO", name: "Algorand", price: algoPrice, change: 1.24, icon: "/algorand.png" },
   ];
 

@@ -17,7 +17,7 @@ const initialMarkets: Omit<MarketData, 'price'>[] = [
     symbol: "ETH",
     name: "Ethereum",
     change24h: -3.83,
-    icon: "⟠",
+    icon: "/eth.png",
     sparklineData: [4200, 4150, 4100, 4050, 4000, 4020, 4071],
     category: "L1/L2"
   },
@@ -25,7 +25,7 @@ const initialMarkets: Omit<MarketData, 'price'>[] = [
     symbol: "BTC",
     name: "Bitcoin",
     change24h: -1.65,
-    icon: "₿",
+    icon: "/btc.png",
     sparklineData: [115000, 114500, 114000, 113800, 113500, 113600, 113651],
     category: "L1/L2"
   },
@@ -33,7 +33,7 @@ const initialMarkets: Omit<MarketData, 'price'>[] = [
     symbol: "SOL",
     name: "Solana",
     change24h: -2.67,
-    icon: "◎",
+    icon: "/sol.png",
     sparklineData: [205, 203, 201, 199, 197, 198, 198.86],
     category: "L1/L2"
   },
@@ -41,7 +41,7 @@ const initialMarkets: Omit<MarketData, 'price'>[] = [
     symbol: "ALGO",
     name: "Algorand",
     change24h: 1.24,
-    icon: "🔺",
+    icon: "/algorand.png",
     sparklineData: [0.35, 0.34, 0.36, 0.37, 0.35, 0.36, 0.35],
     category: "L1/L2"
   }
@@ -221,7 +221,11 @@ export default function Markets() {
                   <div className="w-8 h-8 rounded-full flex items-center justify-center text-lg" style={{
                     backgroundColor: 'var(--rk-colors-actionButtonSecondaryBackground)'
                   }}>
-                    {market.icon}
+                    {market.icon.startsWith('/') ? (
+                      <img src={market.icon} alt={market.name} className="w-6 h-6" />
+                    ) : (
+                      market.icon
+                    )}
                   </div>
                   <div>
                     <div className="font-semibold" style={{

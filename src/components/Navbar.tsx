@@ -53,7 +53,7 @@ export default function Navbar() {
           </Link>
           <Link
             to="/trade/ALGOUSD"
-            className={`transition-colors hover:opacity-80 ${location.pathname.startsWith('/trade') ? 'pb-1 border-b-2' : ''}`}
+            className={`flex items-center space-x-2 transition-colors hover:opacity-80 ${location.pathname.startsWith('/trade') ? 'pb-1 border-b-2' : ''}`}
             style={{
               color: location.pathname.startsWith('/trade')
                 ? 'var(--rk-colors-modalText)'
@@ -63,7 +63,8 @@ export default function Navbar() {
                 : 'transparent'
             }}
           >
-            Trade
+            <img src="/algorand.png" alt="Algorand" className="w-4 h-4" />
+            <span>Trade</span>
           </Link>
           <Link to="/rewards" className="transition-colors hover:opacity-80" style={{
             color: 'var(--rk-colors-modalTextSecondary)'
