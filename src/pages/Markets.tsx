@@ -107,7 +107,7 @@ const MiniChart = ({ data, isPositive }: { data: number[], isPositive: boolean }
       <polyline
         points={points}
         fill="none"
-        stroke={isPositive ? 'var(--rk-colors-connectionIndicator)' : 'var(--rk-colors-error)'}
+        stroke={isPositive ? '#a3be8c' : '#bf616a'}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -169,8 +169,8 @@ export default function Markets() {
     <motion.div
       className="min-h-screen pt-20"
       style={{
-        backgroundColor: 'var(--rk-colors-modalBackground)',
-        color: 'var(--rk-colors-modalText)'
+        backgroundColor: '#242931',
+        color: '#eceff4'
       }}
       initial="hidden"
       animate="show"
@@ -203,10 +203,10 @@ export default function Markets() {
               }`}
               style={{
                 color: selectedCategory === category
-                  ? 'var(--rk-colors-modalText)'
-                  : 'var(--rk-colors-modalTextSecondary)',
+                  ? '#eceff4'
+                  : '#d8dee9',
                 backgroundColor: selectedCategory === category
-                  ? 'var(--rk-colors-actionButtonSecondaryBackground)'
+                  ? '#3b4252'
                   : 'transparent'
               }}
               initial={{ opacity: 0, y: -20 }}
@@ -224,8 +224,8 @@ export default function Markets() {
         <motion.div
           className="rounded-lg overflow-hidden"
           style={{
-            backgroundColor: 'var(--rk-colors-modalBackground)',
-            border: '1px solid var(--rk-colors-generalBorder)'
+            backgroundColor: '#242931',
+            border: '1px solid #434c5e'
           }}
           variants={item}
           whileHover={{ scale: 1.01 }}
@@ -235,29 +235,29 @@ export default function Markets() {
           <motion.div
             className="grid grid-cols-4 px-6 py-4 border-b"
             style={{
-              borderColor: 'var(--rk-colors-generalBorder)'
+              borderColor: '#434c5e'
             }}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
             <div className="text-sm font-medium" style={{
-              color: 'var(--rk-colors-modalTextSecondary)'
+              color: '#d8dee9'
             }}>
               Market
             </div>
             <div className="text-sm font-medium text-right" style={{
-              color: 'var(--rk-colors-modalTextSecondary)'
+              color: '#d8dee9'
             }}>
               Price
             </div>
             <div className="text-sm font-medium text-right" style={{
-              color: 'var(--rk-colors-modalTextSecondary)'
+              color: '#d8dee9'
             }}>
               24h Change
             </div>
             <div className="text-sm font-medium text-right" style={{
-              color: 'var(--rk-colors-modalTextSecondary)'
+              color: '#d8dee9'
             }}>
               Last 24h
             </div>
@@ -267,7 +267,7 @@ export default function Markets() {
           <div>
             {loading ? (
               <div className="flex justify-center items-center py-12">
-                <div className="text-lg" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+                <div className="text-lg" style={{ color: '#d8dee9' }}>
                   Loading market data...
                 </div>
               </div>
@@ -277,7 +277,7 @@ export default function Markets() {
                 onClick={() => handleMarketClick(market.symbol)}
                 className="grid grid-cols-4 px-6 py-4 cursor-pointer transition-colors hover:opacity-80 border-b"
                 style={{
-                  borderColor: 'var(--rk-colors-generalBorderDim)'
+                  borderColor: '#4c566a'
                 }}
                 variants={marketCard}
                 initial="hidden"
@@ -293,7 +293,7 @@ export default function Markets() {
                 {/* Market Info */}
                 <div className="flex items-center space-x-3">
                   <div className="w-8 h-8 rounded-full flex items-center justify-center text-lg" style={{
-                    backgroundColor: 'var(--rk-colors-actionButtonSecondaryBackground)'
+                    backgroundColor: '#3b4252'
                   }}>
                     {market.icon.startsWith('/') ? (
                       <img src={market.icon} alt={market.name} className="w-6 h-6" />
@@ -303,12 +303,12 @@ export default function Markets() {
                   </div>
                   <div>
                     <div className="font-semibold" style={{
-                      color: 'var(--rk-colors-modalText)'
+                      color: '#eceff4'
                     }}>
                       {market.symbol}
                     </div>
                     <div className="text-sm" style={{
-                      color: 'var(--rk-colors-modalTextSecondary)'
+                      color: '#d8dee9'
                     }}>
                       {market.name}
                     </div>
@@ -317,7 +317,7 @@ export default function Markets() {
 
                 {/* Price */}
                 <div className="text-right font-medium" style={{
-                  color: 'var(--rk-colors-modalText)'
+                  color: '#eceff4'
                 }}>
                   ${market.price.toLocaleString(undefined, {
                     minimumFractionDigits: market.price < 1 ? 6 : 2,
@@ -328,8 +328,8 @@ export default function Markets() {
                 {/* 24h Change */}
                 <div className="text-right font-medium" style={{
                   color: market.change24h >= 0
-                    ? 'var(--rk-colors-connectionIndicator)'
-                    : 'var(--rk-colors-error)'
+                    ? '#a3be8c'
+                    : '#bf616a'
                 }}>
                   {market.change24h >= 0 ? '+' : ''}{market.change24h.toFixed(2)}%
                 </div>
@@ -345,7 +345,7 @@ export default function Markets() {
             ))}
             {!loading && filteredMarkets.length === 0 && (
               <div className="flex justify-center items-center py-12">
-                <div className="text-lg" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+                <div className="text-lg" style={{ color: '#d8dee9' }}>
                   No markets found for this category
                 </div>
               </div>
@@ -362,7 +362,7 @@ export default function Markets() {
           viewport={{ once: true }}
         >
           <p className="text-sm" style={{
-            color: 'var(--rk-colors-modalTextSecondary)'
+            color: '#d8dee9'
           }}>
             Real-time market data • Updated every second
           </p>

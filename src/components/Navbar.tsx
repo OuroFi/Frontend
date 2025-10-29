@@ -51,8 +51,8 @@ export default function Navbar() {
     <motion.div
       className="fixed top-0 left-0 right-0 z-50"
       style={{
-        backgroundColor: 'var(--rk-colors-modalBackground)',
-        borderBottom: '1px solid var(--rk-colors-generalBorder)'
+        backgroundColor: '#242931',
+        borderBottom: '1px solid #434c5e'
       }}
       initial="hidden"
       animate="show"
@@ -70,7 +70,7 @@ export default function Navbar() {
               transition={{ type: "spring", stiffness: 300 }}
             />
             <span className="text-xl font-bold" style={{
-              color: 'var(--rk-colors-modalText)'
+              color: '#eceff4'
             }}>Ouro</span>
           </Link>
         </motion.div>
@@ -83,10 +83,10 @@ export default function Navbar() {
               className={`transition-colors hover:opacity-80 ${location.pathname === '/markets' ? 'pb-1 border-b-2' : ''}`}
               style={{
                 color: location.pathname === '/markets'
-                  ? 'var(--rk-colors-modalText)'
-                  : 'var(--rk-colors-modalTextSecondary)',
+                  ? '#eceff4'
+                  : '#d8dee9',
                 borderBottomColor: location.pathname === '/markets'
-                  ? 'var(--rk-colors-accentColor)'
+                  ? '#5e81ac'
                   : 'transparent'
               }}
             >
@@ -99,10 +99,10 @@ export default function Navbar() {
               className={`flex items-center space-x-2 transition-colors hover:opacity-80 ${location.pathname.startsWith('/trade') ? 'pb-1 border-b-2' : ''}`}
               style={{
                 color: location.pathname.startsWith('/trade')
-                  ? 'var(--rk-colors-modalText)'
-                  : 'var(--rk-colors-modalTextSecondary)',
+                  ? '#eceff4'
+                  : '#d8dee9',
                 borderBottomColor: location.pathname.startsWith('/trade')
-                  ? 'var(--rk-colors-accentColor)'
+                  ? '#5e81ac'
                   : 'transparent'
               }}
             >
@@ -118,7 +118,7 @@ export default function Navbar() {
           </motion.div>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Link to="/rewards" className="transition-colors hover:opacity-80" style={{
-              color: 'var(--rk-colors-modalTextSecondary)'
+              color: '#d8dee9'
             }}>
               Rewards
             </Link>
@@ -155,7 +155,7 @@ export default function Navbar() {
               onClick={connect}
               className="px-6 py-2 font-semibold transition-colors hover:opacity-90"
               style={{
-                backgroundColor: 'var(--rk-colors-connectionIndicator)',
+                backgroundColor: '#a3be8c',
                 color: '#000',
                 borderRadius: 'var(--rk-radii-connectButton)',
                 border: 'none',
@@ -179,18 +179,18 @@ export default function Navbar() {
               <motion.div
                 className="rounded-lg px-4 py-2"
                 style={{
-                  backgroundColor: 'var(--rk-colors-actionButtonSecondaryBackground)',
+                  backgroundColor: '#3b4252',
                   borderRadius: 'var(--rk-radii-connectButton)'
                 }}
                 whileHover={{ scale: 1.05 }}
               >
                 <span className="font-mono text-sm" style={{
-                  color: 'var(--rk-colors-modalText)'
+                  color: '#eceff4'
                 }}>{account}</span>
               </motion.div>
               <Menu as="div" className="relative">
                 <MenuButton className="flex items-center space-x-2 rounded-lg px-3 py-2 transition-colors hover:opacity-80" style={{
-                  backgroundColor: 'var(--rk-colors-actionButtonSecondaryBackground)',
+                  backgroundColor: '#3b4252',
                   borderRadius: 'var(--rk-radii-connectButton)'
                 }}>
                   <div className="w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>

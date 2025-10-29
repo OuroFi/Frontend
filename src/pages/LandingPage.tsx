@@ -128,18 +128,18 @@ export default function LandingPage() {
   return (
     <motion.main
       className="min-h-screen"
-      style={{ backgroundColor: 'var(--rk-colors-modalBackground)' }}
+      style={{ backgroundColor: '#242931' }}
       initial="hidden"
       animate="show"
       variants={container}
     >
-      <div className="pt-20 px-4 lg:px-5 max-w-[1600px] mx-auto">
+      <div className="pt-20 px-4 lg:px-5 max-w-[1600px] mx-auto mt-5">
         {/* Hero Section */}
         <motion.div
           className="flex flex-col gap-10 bg-gradient-to-br p-8 lg:p-20 rounded-3xl relative overflow-hidden"
           style={{
-            background: `linear-gradient(135deg, var(--rk-colors-accentColor)20 0%, var(--rk-colors-connectionIndicator)20 100%)`,
-            color: 'var(--rk-colors-modalText)'
+            background: `linear-gradient(135deg, #5e81ac 0%, #a3be8c 100%)`,
+            color: '#eceff4'
           }}
           variants={item}
           whileHover={{ scale: 1.02 }}
@@ -189,8 +189,8 @@ export default function LandingPage() {
                 <motion.button
                   className="px-10 py-6 rounded-2xl font-bold text-lg transition-all duration-300 flex items-center gap-2"
                   style={{
-                    backgroundColor: 'var(--rk-colors-modalBackground)',
-                    color: 'var(--rk-colors-modalText)',
+                    backgroundColor: '#242931',
+                    color: '#eceff4',
                   }}
                   onClick={() => navigate("/trade/ALGOUSD")}
                   whileHover={{ scale: 1.05 }}
@@ -305,10 +305,10 @@ export default function LandingPage() {
           variants={container}
         >
           <motion.div className="text-center mb-16" variants={item}>
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6" style={{ color: 'var(--rk-colors-modalText)' }}>
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6" style={{ color: '#eceff4' }}>
               Popular Markets
             </h2>
-            <p className="text-xl max-w-3xl mx-auto" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+            <p className="text-xl max-w-3xl mx-auto" style={{ color: '#d8dee9' }}>
               Trade the most popular crypto assets with competitive spreads
             </p>
           </motion.div>
@@ -334,7 +334,7 @@ export default function LandingPage() {
               >
                 <div className="flex items-center space-x-3 mb-6">
                   <div className="w-12 h-12 rounded-xl flex items-center justify-center"
-                       style={{ backgroundColor: 'var(--rk-colors-actionButtonSecondaryBackground)' }}>
+                       style={{ backgroundColor: '#3b4252' }}>
                     {market.icon ? (
                       <img src={market.icon} alt={market.name} className="w-8 h-8" />
                     ) : (
@@ -342,16 +342,16 @@ export default function LandingPage() {
                     )}
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg" style={{ color: 'var(--rk-colors-modalText)' }}>
+                    <h3 className="font-semibold text-lg" style={{ color: '#eceff4' }}>
                       {market.symbol}/USD
                     </h3>
-                    <p className="text-sm" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+                    <p className="text-sm" style={{ color: '#d8dee9' }}>
                       {market.name}
                     </p>
                   </div>
                 </div>
                 <div className="text-2xl font-bold mb-2"
-                     style={{ color: 'var(--rk-colors-connectionIndicator)' }}>
+                     style={{ color: '#a3be8c' }}>
                   ${market.price.toLocaleString(undefined, {
                     minimumFractionDigits: market.price < 1 ? 6 : 2,
                     maximumFractionDigits: market.price < 1 ? 8 : 2
@@ -360,8 +360,8 @@ export default function LandingPage() {
                 <div className={`text-sm font-medium`}
                      style={{
                        color: market.change >= 0
-                         ? 'var(--rk-colors-connectionIndicator)'
-                         : 'var(--rk-colors-error)'
+                         ? '#a3be8c'
+                         : '#bf616a'
                      }}>
                   {market.change >= 0 ? "+" : ""}{market.change}%
                 </div>
@@ -379,10 +379,10 @@ export default function LandingPage() {
           variants={container}
         >
           <motion.div className="text-center mb-16" variants={item}>
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6" style={{ color: 'var(--rk-colors-modalText)' }}>
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6" style={{ color: '#eceff4' }}>
               Advanced Trading Features
             </h2>
-            <p className="text-xl max-w-3xl mx-auto" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+            <p className="text-xl max-w-3xl mx-auto" style={{ color: '#d8dee9' }}>
               Everything you need for professional perpetual trading in one platform
             </p>
           </motion.div>
@@ -402,14 +402,14 @@ export default function LandingPage() {
               >
                 <div className="h-14 w-14 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300"
                      style={{
-                       background: `linear-gradient(135deg, var(--rk-colors-accentColor) 0%, var(--rk-colors-connectionIndicator) 100%)`
+                       background: `linear-gradient(135deg, #5e81ac 0%, #a3be8c 100%)`
                      }}>
                   <span className="text-2xl">{feature.icon}</span>
                 </div>
-                <h3 className="text-2xl font-bold mb-4" style={{ color: 'var(--rk-colors-modalText)' }}>
+                <h3 className="text-2xl font-bold mb-4" style={{ color: '#eceff4' }}>
                   {feature.title}
                 </h3>
-                <p className="text-lg leading-relaxed" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+                <p className="text-lg leading-relaxed" style={{ color: '#d8dee9' }}>
                   {feature.description}
                 </p>
               </motion.div>
@@ -420,10 +420,10 @@ export default function LandingPage() {
         {/* Roadmap Section */}
         <section className="py-20 px-4 lg:px-40">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-6xl font-bold mb-6 tracking-tighter" style={{ color: 'var(--rk-colors-modalText)' }}>
+            <h2 className="text-4xl lg:text-6xl font-bold mb-6 tracking-tighter" style={{ color: '#eceff4' }}>
               Platform Roadmap
             </h2>
-            <p className="text-xl max-w-3xl mx-auto tracking-tight" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+            <p className="text-xl max-w-3xl mx-auto tracking-tight" style={{ color: '#d8dee9' }}>
               Our journey to build the most advanced perpetual trading platform
             </p>
           </div>
@@ -431,7 +431,7 @@ export default function LandingPage() {
           <div className="relative">
             <div className="absolute left-8 lg:left-1/2 top-0 bottom-0 w-px transform -translate-x-1/2"
                  style={{
-                   background: `linear-gradient(to bottom, var(--rk-colors-accentColor), var(--rk-colors-connectionIndicator))`
+                   background: `linear-gradient(to bottom, #5e81ac, #a3be8c)`
                  }} />
 
             <div className="space-y-20">
@@ -450,9 +450,9 @@ export default function LandingPage() {
                           : "border-opacity-30"
                       }`}
                     style={{
-                      borderColor: milestone.status === "current" ? 'transparent' : 'var(--rk-colors-accentColor)',
+                      borderColor: milestone.status === "current" ? 'transparent' : '#5e81ac',
                       background: milestone.status === "current"
-                        ? `linear-gradient(135deg, var(--rk-colors-accentColor) 0%, var(--rk-colors-connectionIndicator) 100%)`
+                        ? `linear-gradient(135deg, #5e81ac 0%, #a3be8c 100%)`
                         : 'transparent'
                     }}
                   >
@@ -478,14 +478,14 @@ export default function LandingPage() {
                           ? 'rgba(255, 255, 255, 0.1)'
                           : 'rgba(255, 255, 255, 0.05)',
                         borderColor: milestone.status === "current"
-                          ? 'var(--rk-colors-accentColor)'
+                          ? '#5e81ac'
                           : 'rgba(255, 255, 255, 0.1)'
                       }}
                     >
                       <div className="flex items-start gap-6">
                         <div className="h-14 w-14 rounded-xl flex items-center justify-center flex-shrink-0"
                              style={{
-                               background: `linear-gradient(135deg, var(--rk-colors-accentColor) 0%, var(--rk-colors-connectionIndicator) 100%)`
+                               background: `linear-gradient(135deg, #5e81ac 0%, #a3be8c 100%)`
                              }}>
                           <span className="text-xl">🚀</span>
                         </div>
@@ -499,11 +499,11 @@ export default function LandingPage() {
                               }`}
                               style={{
                                 backgroundColor: milestone.status === "current"
-                                  ? 'rgba(var(--rk-colors-accentColor), 0.2)'
+                                  ? 'rgba(94, 129, 172, 0.2)'
                                   : 'rgba(255, 255, 255, 0.1)',
                                 color: milestone.status === "current"
-                                  ? 'var(--rk-colors-accentColor)'
-                                  : 'var(--rk-colors-modalTextSecondary)'
+                                  ? '#5e81ac'
+                                  : '#d8dee9'
                               }}
                             >
                               {milestone.quarter}
@@ -511,19 +511,19 @@ export default function LandingPage() {
                             {milestone.status === "current" && (
                               <span className="text-sm px-3 py-1 rounded-full flex items-center gap-2"
                                     style={{
-                                      color: 'var(--rk-colors-connectionIndicator)',
-                                      backgroundColor: 'rgba(var(--rk-colors-connectionIndicator), 0.1)'
+                                      color: '#a3be8c',
+                                      backgroundColor: 'rgba(163, 190, 140, 0.1)'
                                     }}>
                                 <div className="w-2 h-2 rounded-full animate-pulse"
-                                     style={{ backgroundColor: 'var(--rk-colors-connectionIndicator)' }} />
+                                     style={{ backgroundColor: '#a3be8c' }} />
                                 Current Focus
                               </span>
                             )}
                           </div>
-                          <h3 className="text-2xl font-bold mb-3 tracking-tight" style={{ color: 'var(--rk-colors-modalText)' }}>
+                          <h3 className="text-2xl font-bold mb-3 tracking-tight" style={{ color: '#eceff4' }}>
                             {milestone.title}
                           </h3>
-                          <p className="mb-4 tracking-tight" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+                          <p className="mb-4 tracking-tight" style={{ color: '#d8dee9' }}>
                             {milestone.description}
                           </p>
                           <ul className="space-y-3">
@@ -531,11 +531,11 @@ export default function LandingPage() {
                               <li
                                 key={itemIndex}
                                 className="flex items-center gap-3"
-                                style={{ color: 'var(--rk-colors-modalTextSecondary)' }}
+                                style={{ color: '#d8dee9' }}
                               >
                                 <div className="w-1.5 h-1.5 rounded-full"
                                      style={{
-                                       background: `linear-gradient(135deg, var(--rk-colors-accentColor) 0%, var(--rk-colors-connectionIndicator) 100%)`
+                                       background: `linear-gradient(135deg, #5e81ac 0%, #a3be8c 100%)`
                                      }} />
                                 <span>{item}</span>
                               </li>
@@ -554,18 +554,18 @@ export default function LandingPage() {
         {/* CTA Section */}
         <section className="py-20 px-4">
           <div className="text-center">
-            <h2 className="text-4xl lg:text-6xl font-bold mb-6 tracking-tighter" style={{ color: 'var(--rk-colors-modalText)' }}>
+            <h2 className="text-4xl lg:text-6xl font-bold mb-6 tracking-tighter" style={{ color: '#eceff4' }}>
               Ready to Start Trading?
             </h2>
-            <p className="text-xl max-w-3xl mx-auto tracking-tight mb-8" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+            <p className="text-xl max-w-3xl mx-auto tracking-tight mb-8" style={{ color: '#d8dee9' }}>
               Join thousands of traders already using Ouro Finance to trade crypto derivatives
             </p>
             <button
               onClick={() => navigate("/trade/ALGOUSD")}
               className="px-10 py-6 rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-105"
               style={{
-                backgroundColor: 'var(--rk-colors-connectionIndicator)',
-                color: 'var(--rk-colors-modalBackground)',
+                backgroundColor: '#a3be8c',
+                color: '#242931',
               }}
             >
               Launch App
@@ -578,18 +578,18 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="border-t py-8"
               style={{
-                backgroundColor: 'var(--rk-colors-actionButtonSecondaryBackground)',
-                borderColor: 'var(--rk-colors-generalBorder)'
+                backgroundColor: '#3b4252',
+                borderColor: '#434c5e'
               }}>
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
               <img src="/logo.png" alt="Ouro Logo" className="w-8 h-8 rounded-full" />
-              <span className="text-xl font-bold" style={{ color: 'var(--rk-colors-modalText)' }}>
+              <span className="text-xl font-bold" style={{ color: '#eceff4' }}>
                 Ouro Finance
               </span>
             </div>
-            <div className="flex space-x-6" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+            <div className="flex space-x-6" style={{ color: '#d8dee9' }}>
               <Link to="/docs" className="transition-colors hover:opacity-80">Docs</Link>
               <Link to="/terms" className="transition-colors hover:opacity-80">Terms</Link>
               <Link to="/privacy" className="transition-colors hover:opacity-80">Privacy</Link>

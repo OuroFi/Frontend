@@ -64,32 +64,13 @@ export default function Trade() {
     console.log("Buy/Long order:", { amount, leverage, orderType });
   };
 
-  const renderTimeframes = () => {
-    const timeframes = ["1m", "5m", "15m", "30m", "1hr", "4hr", "D"];
-    return (
-      <div className="flex space-x-1 mb-4">
-        {timeframes.map((tf) => (
-          <button
-            key={tf}
-            className={`px-3 py-1.5 text-xs font-medium rounded ${
-              tf === "30m"
-                ? "bg-gray-600 text-white"
-                : "text-gray-400 hover:text-white hover:bg-gray-700 transition-colors"
-            }`}
-          >
-            {tf}
-          </button>
-        ))}
-      </div>
-    );
-  };
 
   return (
     <motion.div
       className="min-h-screen mt-20"
       style={{
-        backgroundColor: 'var(--rk-colors-modalBackground)',
-        color: 'var(--rk-colors-modalText)'
+        backgroundColor: '#242931',
+        color: '#eceff4'
       }}
       initial="hidden"
       animate="show"
@@ -101,7 +82,7 @@ export default function Trade() {
           <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 rounded-full flex items-center justify-center"
-                   style={{ backgroundColor: 'var(--rk-colors-actionButtonSecondaryBackground)' }}>
+                   style={{ backgroundColor: '#3b4252' }}>
                 {(() => {
                   const iconMap: { [key: string]: string } = {
                     ETH: "/eth.png",
@@ -112,23 +93,23 @@ export default function Trade() {
                   return iconMap[currentSymbol] ? (
                     <img src={iconMap[currentSymbol]} alt={currentSymbol} className="w-6 h-6" />
                   ) : (
-                    <span className="font-bold text-sm" style={{ color: 'var(--rk-colors-modalText)' }}>
+                    <span className="font-bold text-sm" style={{ color: '#eceff4' }}>
                       {currentSymbol}
                     </span>
                   );
                 })()}
               </div>
-              <h1 className="text-xl font-semibold" style={{ color: 'var(--rk-colors-modalText)' }}>
+              <h1 className="text-xl font-semibold" style={{ color: '#eceff4' }}>
                 {currentSymbol} / USD
               </h1>
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                   style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+                   style={{ color: '#d8dee9' }}>
                 <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
             </div>
 
             <div className="text-2xl font-bold"
-                 style={{ color: priceChange >= 0 ? 'var(--rk-colors-connectionIndicator)' : 'var(--rk-colors-error)' }}>
+                 style={{ color: priceChange >= 0 ? '#a3be8c' : '#bf616a' }}>
               {price.toLocaleString()}
               <span className="text-lg ml-2">{priceChange}%</span>
             </div>
@@ -136,26 +117,26 @@ export default function Trade() {
             {/* Market stats */}
             <div className="flex flex-wrap gap-4 lg:gap-6 text-sm">
               <div>
-                <div className="text-xs" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+                <div className="text-xs" style={{ color: '#d8dee9' }}>
                   Index Price
                 </div>
-                <div className="font-medium" style={{ color: 'var(--rk-colors-modalText)' }}>
+                <div className="font-medium" style={{ color: '#eceff4' }}>
                   {indexPrice}
                 </div>
               </div>
               <div>
-                <div className="text-xs" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+                <div className="text-xs" style={{ color: '#d8dee9' }}>
                   Funding Rate
                 </div>
-                <div className="font-medium" style={{ color: 'var(--rk-colors-modalText)' }}>
+                <div className="font-medium" style={{ color: '#eceff4' }}>
                   {fundingRate}
                 </div>
               </div>
               <div>
-                <div className="text-xs" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+                <div className="text-xs" style={{ color: '#d8dee9' }}>
                   Market Skew
                 </div>
-                <div className="font-medium" style={{ color: 'var(--rk-colors-modalText)' }}>
+                <div className="font-medium" style={{ color: '#eceff4' }}>
                   {marketSkew}
                 </div>
               </div>
@@ -164,9 +145,9 @@ export default function Trade() {
 
           <div className="flex items-center space-x-2">
             <button className="p-2 rounded transition-colors hover:opacity-80"
-                    style={{ backgroundColor: 'var(--rk-colors-actionButtonSecondaryBackground)' }}>
+                    style={{ backgroundColor: '#3b4252' }}>
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                   style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+                   style={{ color: '#d8dee9' }}>
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
@@ -177,7 +158,6 @@ export default function Trade() {
 
       {/* Main content area with chart and side panel */}
       <motion.div className="px-6" variants={item}>
-
         {/* Chart and Trading Panel Layout */}
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Chart container - takes remaining space */}
@@ -188,8 +168,6 @@ export default function Trade() {
             transition={{ type: "spring", stiffness: 300 }}
           >
             <div className="h-[400px] lg:h-[600px] rounded-lg overflow-hidden" style={{
-              backgroundColor: 'var(--rk-colors-actionButtonSecondaryBackground)',
-              border: '1px solid var(--rk-colors-generalBorder)'
             }}>
               <TradingViewWidget symbol={`${currentSymbol}USD`} />
             </div>
@@ -203,8 +181,8 @@ export default function Trade() {
             transition={{ type: "spring", stiffness: 300 }}
           >
             <div className="rounded-lg p-4 h-fit" style={{
-              backgroundColor: 'var(--rk-colors-modalBackground)',
-              border: '1px solid var(--rk-colors-generalBorder)',
+              backgroundColor: '#242931',
+              border: '1px solid #434c5e',
               borderRadius: 'var(--rk-radii-modal)'
             }}>
               {/* Market/Limit tabs */}
@@ -219,8 +197,8 @@ export default function Trade() {
                         : "hover:opacity-80"
                     }`}
                     style={{
-                      color: activeTab === tab ? 'var(--rk-colors-modalText)' : 'var(--rk-colors-modalTextSecondary)',
-                      borderBottomColor: activeTab === tab ? 'var(--rk-colors-accentColor)' : 'transparent'
+                      color: activeTab === tab ? '#eceff4' : '#d8dee9',
+                      borderBottomColor: activeTab === tab ? '#5e81ac' : 'transparent'
                     }}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -246,7 +224,7 @@ export default function Trade() {
 
               {/* Buy/Sell tabs */}
               <div className="flex mb-4 rounded-lg p-1" style={{
-                backgroundColor: 'var(--rk-colors-actionButtonSecondaryBackground)'
+                backgroundColor: '#3b4252'
               }}>
                 {["BUY", "SELL"].map((type) => (
                   <motion.button
@@ -257,11 +235,11 @@ export default function Trade() {
                     }`}
                     style={{
                       backgroundColor: orderType === type
-                        ? (type === "BUY" ? 'var(--rk-colors-connectionIndicator)' : 'var(--rk-colors-error)')
+                        ? (type === "BUY" ? '#a3be8c' : '#bf616a')
                         : 'transparent',
                       color: orderType === type
-                        ? (type === "BUY" ? '#000' : 'var(--rk-colors-modalText)')
-                        : 'var(--rk-colors-modalTextSecondary)',
+                        ? (type === "BUY" ? '#242931' : '#eceff4')
+                        : '#d8dee9',
                       borderRadius: 'var(--rk-radii-connectButton)'
                     }}
                     whileHover={{ scale: 1.05 }}
@@ -278,7 +256,7 @@ export default function Trade() {
               {/* Amount input */}
               <div className="mb-4">
                 <label className="block text-xs mb-2 font-medium" style={{
-                  color: 'var(--rk-colors-modalTextSecondary)'
+                  color: '#d8dee9'
                 }}>PAY</label>
                 <div className="relative">
                   <input
@@ -288,10 +266,10 @@ export default function Trade() {
                     className="w-full px-3 py-2 text-sm"
                     placeholder="0.00"
                     style={{
-                      backgroundColor: 'var(--rk-colors-actionButtonSecondaryBackground)',
-                      border: '1px solid var(--rk-colors-generalBorder)',
+                      backgroundColor: '#3b4252',
+                      border: '1px solid #434c5e',
                       borderRadius: 'var(--rk-radii-connectButton)',
-                      color: 'var(--rk-colors-modalText)'
+                      color: '#eceff4'
                     }}
                   />
                   <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
@@ -342,9 +320,9 @@ export default function Trade() {
                 className="w-full py-3 font-bold text-sm transition-colors hover:opacity-90"
                 style={{
                   backgroundColor: orderType === "BUY"
-                    ? 'var(--rk-colors-connectionIndicator)'
-                    : 'var(--rk-colors-error)',
-                  color: orderType === "BUY" ? '#000' : 'var(--rk-colors-modalText)',
+                    ? '#a3be8c'
+                    : '#bf616a',
+                  color: orderType === "BUY" ? '#242931' : '#eceff4',
                   borderRadius: 'var(--rk-radii-connectButton)',
                   border: 'none',
                   boxShadow: 'var(--rk-shadows-connectButton)'
@@ -371,12 +349,12 @@ export default function Trade() {
         viewport={{ once: true }}
       >
         <div className="flex space-x-8 border-b"
-             style={{ borderColor: 'var(--rk-colors-generalBorder)' }}>
+             style={{ borderColor: '#434c5e' }}>
           <motion.button
             className="pb-3 font-medium border-b-2"
             style={{
-              color: 'var(--rk-colors-modalText)',
-              borderBottomColor: 'var(--rk-colors-accentColor)'
+              color: '#eceff4',
+              borderBottomColor: '#5e81ac'
             }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -385,7 +363,7 @@ export default function Trade() {
           </motion.button>
           <motion.button
             className="pb-3 transition-colors hover:opacity-80"
-            style={{ color: 'var(--rk-colors-modalTextSecondary)' }}
+            style={{ color: '#d8dee9' }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -393,7 +371,7 @@ export default function Trade() {
           </motion.button>
           <motion.button
             className="pb-3 transition-colors hover:opacity-80"
-            style={{ color: 'var(--rk-colors-modalTextSecondary)' }}
+            style={{ color: '#d8dee9' }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -406,7 +384,7 @@ export default function Trade() {
             transition={{ delay: 0.3 }}
           >
             <input type="checkbox" className="mr-2 text-xs" />
-            <span className="text-xs" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+            <span className="text-xs" style={{ color: '#d8dee9' }}>
               Include Fees
             </span>
           </motion.div>
@@ -417,7 +395,7 @@ export default function Trade() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
         >
-          <div className="text-center text-sm" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+          <div className="text-center text-sm" style={{ color: '#d8dee9' }}>
             No positions found
           </div>
         </motion.div>
