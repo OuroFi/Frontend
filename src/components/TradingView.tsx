@@ -17,16 +17,20 @@ function TradingViewWidget({ symbol }: { symbol: string }) {
           "width": "100%",
           "height": "100%",
           "symbol": "${symbol}",
-          "interval": "D",
+          "interval": "30",
           "timezone": "Etc/UTC",
           "theme": "dark",
-          "style": "3",
+          "style": "1",
           "locale": "en",
-          "backgroundColor": "rgba(20, 20, 20, 1)",
+          "backgroundColor": "rgba(19, 19, 19, 1)",
+          "gridColor": "rgba(42, 46, 57, 0.5)",
           "hide_top_toolbar": false,
           "withdateranges": true,
+          "hide_legend": false,
           "allow_symbol_change": false,
           "calendar": false,
+          "studies": [],
+          "hide_volume": false,
           "support_host": "https://www.tradingview.com"
         }`;
     if (container.current) container.current.appendChild(script);

@@ -55,43 +55,76 @@ export default function Trade() {
     }}>
       {/* Header with price info */}
       <div className="px-6 pt-6 pb-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-6">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">{currentSymbol}</span>
+              <div className="w-8 h-8 rounded-full flex items-center justify-center"
+                   style={{ backgroundColor: 'var(--rk-colors-actionButtonSecondaryBackground)' }}>
+                {(() => {
+                  const iconMap: { [key: string]: string } = {
+                    ETH: "/eth.png",
+                    BTC: "/btc.png",
+                    SOL: "/sol.png",
+                    ALGO: "/algorand.png"
+                  };
+                  return iconMap[currentSymbol] ? (
+                    <img src={iconMap[currentSymbol]} alt={currentSymbol} className="w-6 h-6" />
+                  ) : (
+                    <span className="font-bold text-sm" style={{ color: 'var(--rk-colors-modalText)' }}>
+                      {currentSymbol}
+                    </span>
+                  );
+                })()}
               </div>
-              <h1 className="text-xl font-semibold">{currentSymbol} / USD</h1>
-              <svg className="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+              <h1 className="text-xl font-semibold" style={{ color: 'var(--rk-colors-modalText)' }}>
+                {currentSymbol} / USD
+              </h1>
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                   style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
                 <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
             </div>
 
-            <div className="text-2xl font-bold text-red-400">
+            <div className="text-2xl font-bold"
+                 style={{ color: priceChange >= 0 ? 'var(--rk-colors-connectionIndicator)' : 'var(--rk-colors-error)' }}>
               {price.toLocaleString()}
-              <span className="text-red-400 text-lg ml-2">{priceChange}%</span>
+              <span className="text-lg ml-2">{priceChange}%</span>
             </div>
 
             {/* Market stats */}
-            <div className="flex space-x-6 text-sm">
+            <div className="flex flex-wrap gap-4 lg:gap-6 text-sm">
               <div>
-                <div className="text-gray-400 text-xs">Index Price</div>
-                <div className="text-white font-medium">{indexPrice}</div>
+                <div className="text-xs" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+                  Index Price
+                </div>
+                <div className="font-medium" style={{ color: 'var(--rk-colors-modalText)' }}>
+                  {indexPrice}
+                </div>
               </div>
               <div>
-                <div className="text-gray-400 text-xs">Funding Rate</div>
-                <div className="text-white font-medium">{fundingRate}</div>
+                <div className="text-xs" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+                  Funding Rate
+                </div>
+                <div className="font-medium" style={{ color: 'var(--rk-colors-modalText)' }}>
+                  {fundingRate}
+                </div>
               </div>
               <div>
-                <div className="text-gray-400 text-xs">Market Skew</div>
-                <div className="text-white font-medium">{marketSkew}</div>
+                <div className="text-xs" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+                  Market Skew
+                </div>
+                <div className="font-medium" style={{ color: 'var(--rk-colors-modalText)' }}>
+                  {marketSkew}
+                </div>
               </div>
             </div>
           </div>
 
           <div className="flex items-center space-x-2">
-            <button className="p-2 hover:bg-gray-700 rounded transition-colors">
-              <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button className="p-2 rounded transition-colors hover:opacity-80"
+                    style={{ backgroundColor: 'var(--rk-colors-actionButtonSecondaryBackground)' }}>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                   style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
@@ -100,19 +133,26 @@ export default function Trade() {
         </div>
       </div>
 
-      {/* Main content area with chart and overlay panel */}
-      <div className="relative px-6">
-        {/* Chart container */}
-        <div className="relative">
-          {/* Timeframes */}
-          {renderTimeframes()}
+      {/* Main content area with chart and side panel */}
+      <div className="px-6">
+        {/* Timeframes */}
+        {renderTimeframes()}
 
-          {/* Chart area */}
-          <div className="h-[600px] relative bg-[#1a1a1a]">
-            <TradingViewWidget symbol={`${currentSymbol}USD`} />
+        {/* Chart and Trading Panel Layout */}
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* Chart container - takes remaining space */}
+          <div className="flex-1 order-2 lg:order-1">
+            <div className="h-[400px] lg:h-[600px] rounded-lg overflow-hidden" style={{
+              backgroundColor: 'var(--rk-colors-actionButtonSecondaryBackground)',
+              border: '1px solid var(--rk-colors-generalBorder)'
+            }}>
+              <TradingViewWidget symbol={`${currentSymbol}USD`} />
+            </div>
+          </div>
 
-            {/* Overlaid Trading Panel */}
-            <div className="absolute top-4 right-4 w-80 rounded-lg p-4" style={{
+          {/* Trading Panel - fixed width sidebar */}
+          <div className="w-full lg:w-80 lg:flex-shrink-0 order-1 lg:order-2">
+            <div className="rounded-lg p-4 h-fit" style={{
               backgroundColor: 'var(--rk-colors-modalBackground)',
               border: '1px solid var(--rk-colors-generalBorder)',
               borderRadius: 'var(--rk-radii-modal)'
@@ -258,28 +298,37 @@ export default function Trade() {
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Bottom tabs */}
-        <div className="mt-6 mb-6">
-          <div className="flex space-x-8 border-b border-gray-700">
-            <button className="pb-3 text-white border-b-2 border-white font-medium">
-              Positions
-            </button>
-            <button className="pb-3 text-gray-400 hover:text-white transition-colors">
-              Orders
-            </button>
-            <button className="pb-3 text-gray-400 hover:text-white transition-colors">
-              History
-            </button>
-            <div className="ml-auto flex items-center">
-              <input type="checkbox" className="mr-2 text-xs" />
-              <span className="text-gray-400 text-xs">Include Fees</span>
-            </div>
+      {/* Bottom tabs */}
+      <div className="px-6 mt-6 mb-6">
+        <div className="flex space-x-8 border-b"
+             style={{ borderColor: 'var(--rk-colors-generalBorder)' }}>
+          <button className="pb-3 font-medium border-b-2"
+                  style={{
+                    color: 'var(--rk-colors-modalText)',
+                    borderBottomColor: 'var(--rk-colors-accentColor)'
+                  }}>
+            Positions
+          </button>
+          <button className="pb-3 transition-colors hover:opacity-80"
+                  style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+            Orders
+          </button>
+          <button className="pb-3 transition-colors hover:opacity-80"
+                  style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+            History
+          </button>
+          <div className="ml-auto flex items-center">
+            <input type="checkbox" className="mr-2 text-xs" />
+            <span className="text-xs" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+              Include Fees
+            </span>
           </div>
-          <div className="py-8">
-            <div className="text-center text-gray-500 text-sm">
-              No positions found
-            </div>
+        </div>
+        <div className="py-8">
+          <div className="text-center text-sm" style={{ color: 'var(--rk-colors-modalTextSecondary)' }}>
+            No positions found
           </div>
         </div>
       </div>
